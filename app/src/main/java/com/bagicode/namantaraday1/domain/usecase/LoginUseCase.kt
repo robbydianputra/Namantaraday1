@@ -1,5 +1,6 @@
 package com.bagicode.namantaraday1.domain.usecase
 
+import com.bagicode.namantaraday1.data.mapper.toUserDomain
 import com.bagicode.namantaraday1.data.repository.NamantaraRepository
 import com.bagicode.namantaraday1.domain.model.User
 import javax.inject.Inject
@@ -12,14 +13,7 @@ class LoginUseCase @Inject constructor(
         return try {
             val response = repo.login(username, password)
             if (response.status.equals("success") && response.data != null) {
-                val res = response.data
-                val user = User(
-                    id = res.user?.id ?: 0,
-                    name = res.user?.name.orEmpty() ,
-                    username = res.user?.username.orEmpty(),
-                    image = res.user?.image.orEmpty(),
-                    token = res.token.orEmpty(),
-                )
+                val user = response.data.toUserDomain()
                 Result.success(user)
             } else {
                 Result.failure(Exception(response.message))
