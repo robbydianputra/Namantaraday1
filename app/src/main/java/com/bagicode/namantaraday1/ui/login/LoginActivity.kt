@@ -60,7 +60,14 @@ class LoginActivity : AppCompatActivity() {
         }
 
         binding.btnLogin.setOnClickListener {
-            viewModel.login("robby", "12345654")
+            val username = binding.etUsername.text.toString()
+            val password = binding.etPassword.text.toString()
+
+            if (username.isEmpty() || password.isEmpty()) {
+                Toast.makeText(this@LoginActivity, "Field tidak bole kosong", Toast.LENGTH_SHORT).show()
+            } else {
+                viewModel.login(username, password)
+            }
         }
 
         lifecycleScope.launch {
