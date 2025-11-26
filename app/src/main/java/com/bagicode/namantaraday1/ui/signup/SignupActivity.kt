@@ -8,7 +8,9 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.bagicode.namantaraday1.R
 import com.bagicode.namantaraday1.databinding.ActivitySignupBinding
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class SignupActivity : AppCompatActivity() {
     lateinit var binding: ActivitySignupBinding
 

@@ -6,18 +6,27 @@ import android.os.Bundle
 import android.view.View
 import android.view.WindowInsetsController
 import android.widget.TextView
+import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.lifecycle.lifecycleScope
 import com.bagicode.namantaraday1.R
 import com.bagicode.namantaraday1.databinding.ActivityLoginBinding
 import com.bagicode.namantaraday1.ui.signup.SignupActivity
+import com.bagicode.smkn8jakarta.ui.signin.LoginViewModel
+import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.launch
+import kotlin.getValue
 
+@AndroidEntryPoint
 class LoginActivity : AppCompatActivity() {
 
     lateinit var binding: ActivityLoginBinding
+    private val viewModel: LoginViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -48,6 +57,28 @@ class LoginActivity : AppCompatActivity() {
         binding.tvSignup.setOnClickListener {
             val intent = Intent(this, SignupActivity::class.java)
             startActivity(intent)
+        }
+
+        binding.btnLogin.setOnClickListener {
+            viewModel.login("robby", "12345654")
+        }
+
+        lifecycleScope.launch {
+            viewModel.state.collect { ui ->
+                if (ui.isLoading) {
+                    // show loading
+                    Toast.makeText(this@LoginActivity, "Loading", Toast.LENGTH_SHORT).show()
+                }
+
+                ui.message?.let {
+                    Toast.makeText(this@LoginActivity, it, Toast.LENGTH_SHORT).show()
+                }
+
+                if (ui.success) {
+                    // navigate ke home
+                    Toast.makeText(this@LoginActivity, "Suksess", Toast.LENGTH_SHORT).show()
+                }
+            }
         }
     }
 }
