@@ -12,4 +12,9 @@ class NamantaraRepository @Inject constructor(
         return api.login(username, password)
     }
 
+    suspend fun register(username: String, fullname: String, dateOfBirth: String, password: String): BaseResponse<Any> {
+        return api.register(username, fullname, dateOfBirth, password)
+    }
+
+
 }

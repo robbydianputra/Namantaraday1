@@ -15,4 +15,12 @@ interface NamantaraApi {
         @Field("password") password: String
     ) : BaseResponse<LoginResponse>
 
+    @FormUrlEncoded
+    @POST("auth/register.php")
+    suspend fun register(
+        @Field("username") username: String,
+        @Field("fullname") fullname: String,
+        @Field("dateOfBirth") dateOfBirth: String,
+        @Field("password") password: String
+    ): BaseResponse<Any>
 }
