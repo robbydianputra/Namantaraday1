@@ -14,6 +14,7 @@ import androidx.core.content.ContextCompat
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.lifecycle.lifecycleScope
+import com.bagicode.namantaraday1.MainActivity
 import com.bagicode.namantaraday1.R
 import com.bagicode.namantaraday1.databinding.ActivityLoginBinding
 import com.bagicode.namantaraday1.ui.signup.SignupActivity
@@ -83,7 +84,8 @@ class LoginActivity : AppCompatActivity() {
 
                 if (ui.success) {
                     // navigate ke home
-                    Toast.makeText(this@LoginActivity, "Suksess", Toast.LENGTH_SHORT).show()
+                    startActivity(Intent(this@LoginActivity, MainActivity::class.java))
+                    finish()
                 }
             }
         }

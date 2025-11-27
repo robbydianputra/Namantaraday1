@@ -1,9 +1,12 @@
 package com.bagicode.namantaraday1.di
 
+import android.content.Context
+import com.bagicode.namantaraday1.data.local.datastore.NamantaraPreferences
 import com.bagicode.namantaraday1.data.remote.api.NamantaraApi
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
+import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
@@ -35,4 +38,9 @@ class NetworkModule {
     fun provideNamantaraApi(retrofit: Retrofit): NamantaraApi =
         retrofit.create(NamantaraApi::class.java)
 
+    @Provides
+    @Singleton
+    fun provideUserPreferences(@ApplicationContext context: Context): NamantaraPreferences {
+        return NamantaraPreferences(context)
+    }
 }
