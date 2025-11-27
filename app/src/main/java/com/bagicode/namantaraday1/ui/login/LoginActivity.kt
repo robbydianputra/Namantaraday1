@@ -14,9 +14,9 @@ import androidx.core.content.ContextCompat
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.lifecycle.lifecycleScope
-import com.bagicode.namantaraday1.MainActivity
 import com.bagicode.namantaraday1.R
 import com.bagicode.namantaraday1.databinding.ActivityLoginBinding
+import com.bagicode.namantaraday1.ui.home.MainActivity
 import com.bagicode.namantaraday1.ui.signup.SignupActivity
 import com.bagicode.smkn8jakarta.ui.signin.LoginViewModel
 import dagger.hilt.android.AndroidEntryPoint
